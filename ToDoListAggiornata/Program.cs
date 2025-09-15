@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 
 
-// Classe che rappresenta una singola attività (task) della lista.
+// Classe che rappresenta una singola attività (task) della lista
 
 class TodoTask
 {
@@ -13,7 +13,7 @@ class TodoTask
 
     public override string ToString()
     {
-        return $"{nome} = {(statoTask ? "Completata" : "In sospeso")}";
+        return $"{nome} = {(statoTask ? "Completata" : "In sospeso")}";     //if terniaro se true la task é "completata" altrimenti é in sospeso
     }
 }
 
@@ -34,7 +34,7 @@ class Program
         while (!esci)
         {
             Console.Clear();
-            Console.WriteLine("===== TO-DO LIST =====");
+            Console.WriteLine(" TO-DO LIST ");
             Console.WriteLine("1) Visualizza le task");
             Console.WriteLine("2) Aggiungi una task");
             Console.WriteLine("3) Rimuovi una task");
@@ -76,7 +76,7 @@ class Program
       
     }
 
-    // Visualizza tutte le task nella lista.
+    // Visualizza tutte le task nella lista
 
     static void VisualizzaTask()
     {
@@ -98,7 +98,7 @@ class Program
         Console.ReadKey();
     }
 
-    //Aggiunge una nuova task alla lista.
+    //Aggiunge una nuova task alla lista
 
     static void AggiungiTask()
     {
@@ -121,7 +121,7 @@ class Program
     }
 
 
-    // Rimuove una task dalla lista.
+    // Rimuove una task dalla lista
 
     static void RimuoviTask()
     {
@@ -141,8 +141,8 @@ class Program
         }
 
         string nome = Console.ReadLine();
-        var daEliminare = tasks.FirstOrDefault(t =>
-            t.nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
+        //Cerca nella lista delle task una task che ha lo stesso nome di quella che l'utente vuole eliminare
+        var daEliminare = tasks.FirstOrDefault(t =>t.nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
 
         if (daEliminare == null)
         {
@@ -152,13 +152,13 @@ class Program
         {
             tasks.Remove(daEliminare);
             SalvaSuFile();
-            Console.WriteLine("Task eliminata.");
+            Console.WriteLine("Task eliminata");
         }
 
         Console.ReadKey();
     }
 
-    // Modifica nome e/o stato di una task.
+    // Modifica nome e/o stato di una task
 
     static void ModificaTask()
     {
@@ -178,6 +178,7 @@ class Program
         }
 
         string nome = Console.ReadLine();
+        //Cerca nella lista delle task una task avente il nome inserito
         var taskDaModificare = tasks.FirstOrDefault(t => t.nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
 
         if (taskDaModificare == null)
@@ -194,7 +195,7 @@ class Program
             }
 
             Console.Write("La task è completata? (si/no): ");
-            string risposta = Console.ReadLine().ToLower();
+            string risposta = Console.ReadLine().ToLower(); //Converte la risposta ottenuta dall'utente in una parola avente esclusivamente lettere minuscole
             taskDaModificare.statoTask = risposta == "si";
 
             SalvaSuFile();
@@ -216,7 +217,7 @@ class Program
         }
     }
 
-    // Carica tutte le task dal file di testo.
+    // Carica tutte le task dal file di testo
     static void CaricaDaFile()
     {
         if (!File.Exists(path)) return;
@@ -229,7 +230,7 @@ class Program
                 tasks.Add(new TodoTask
                 {
                     nome = parts[0],
-                    statoTask = bool.Parse(parts[1])
+                    statoTask = bool.Parse(parts[1])    //Converte il contenuto della stringa in una valore booleano
                 });
             }
         }
