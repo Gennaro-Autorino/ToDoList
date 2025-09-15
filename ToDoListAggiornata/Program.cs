@@ -23,7 +23,7 @@ class Program
     static List<TodoTask> tasks = new List<TodoTask>();
 
     // Percorso del file dove salvare le task
-    static string path = @"filetxt\lista.txt";
+    static string path = @"lista.txt";
 
     static void Main()
     {
